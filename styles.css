@@ -62,22 +62,17 @@ body {
     font-weight: 700;
     color: #2563eb;
     text-decoration: none;
-    padding: 0.5rem 1rem;
-    border-radius: 12px;
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.05) 0%, rgba(59, 130, 246, 0.05) 100%);
+    padding: 0;
     transition: all 0.3s ease;
-    border: 1px solid rgba(37, 99, 235, 0.1);
 }
 
 .nav-logo:hover {
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.1) 0%, rgba(59, 130, 246, 0.1) 100%);
     transform: translateY(-1px);
-    box-shadow: 0 4px 15px rgba(37, 99, 235, 0.15);
 }
 
 .logo-img {
-    width: 200px;
-    height: 100px;
+    width: 300px;
+    height: 120px;
     object-fit: contain;
 }
 
