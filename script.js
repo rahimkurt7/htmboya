@@ -83,12 +83,68 @@ if (contactForm) {
             formObject[key] = value;
         });
         
-        // Show success message
-        showNotification('Mesajınız başarıyla gönderildi! En kısa sürede size dönüş yapacağız.', 'success');
+        // Create WhatsApp message
+        const whatsappMessage = createWhatsAppMessage(formObject);
+        
+        // Ask user preference
+        const userChoice = confirm('Mesajınızı nasıl göndermek istiyorsunuz?\n\n"Tamam" = WhatsApp\'ta hazırla\n"İptal" = E-posta ile gönder');
+        
+        if (userChoice) {
+            // Open WhatsApp with the message
+            const whatsappUrl = `https://api.whatsapp.com/send?phone=905334952776&text=${encodeURIComponent(whatsappMessage)}`;
+            window.open(whatsappUrl, '_blank');
+            
+            // Show success message
+            showNotification('WhatsApp açılıyor... Mesajınız hazırlandı! "Gönder" butonuna basın.', 'success');
+        } else {
+            // Send via email
+            const emailSubject = 'Elektrik Boya - Yeni Müşteri Talebi';
+            const emailBody = whatsappMessage.replace(/\*/g, ''); // Remove markdown
+            const emailUrl = `mailto:info@htmelektrostatik.com?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+            window.open(emailUrl, '_blank');
+            
+            // Show success message
+            showNotification('E-posta uygulamanız açılıyor... Mesajınızı gönderebilirsiniz.', 'success');
+        }
         
         // Reset form
         this.reset();
     });
+}
+
+// Create WhatsApp message from form data
+function createWhatsAppMessage(formData) {
+    const currentDate = new Date().toLocaleDateString('tr-TR');
+    const currentTime = new Date().toLocaleTimeString('tr-TR');
+    
+    let message = `🖼️ *Elektrik Boya - Yeni Müşteri Talebi*\n\n`;
+    message += `📅 *Tarih:* ${currentDate}\n`;
+    message += `⏰ *Saat:* ${currentTime}\n\n`;
+    message += `👤 *Müşteri Bilgileri:*\n`;
+    
+    // Form alanlarını kontrol et ve mesaja ekle
+    if (formData.name) {
+        message += `• *Ad Soyad:* ${formData.name}\n`;
+    }
+    if (formData.email) {
+        message += `• *E-posta:* ${formData.email}\n`;
+    }
+    if (formData.phone) {
+        message += `• *Telefon:* ${formData.phone}\n`;
+    }
+    if (formData.service) {
+        message += `• *Hizmet:* ${formData.service}\n`;
+    }
+    if (formData.message) {
+        message += `\n💬 *Mesaj:*\n${formData.message}\n`;
+    }
+    
+    message += `\n🏢 *Firma:* HTM Elektrostatik Boya\n`;
+    message += `📍 *Konum:* İzmir, Çiğli AOSB\n`;
+    message += `\n---\n`;
+    message += `Bu mesaj web sitesi üzerinden otomatik olarak gönderilmiştir.`;
+    
+    return message;
 }
 
 // Notification system
