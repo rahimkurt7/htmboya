@@ -1,0 +1,16 @@
+{
+  "name": "elektrikboya",
+  "version": "1.0.0",
+  "description": "Elektrik Boya website",
+  "main": "index.html",
+  "scripts": {
+    "start": "live-server --port=3000 --open=/index.html",
+    "dev": "live-server --port=3000 --open=/index.html"
+  },
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "keywords": ["website", "static", "html", "css", "javascript"],
+  "author": "",
+  "license": "ISC"
+} 
