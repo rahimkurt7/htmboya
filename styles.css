@@ -156,7 +156,7 @@ body {
 .slogan-text {
     display: flex;
     white-space: nowrap;
-    animation: scrollSlogan 60s linear infinite;
+    animation: scrollSlogan 120s linear infinite;
     width: max-content;
     animation-delay: 0s;
     opacity: 1;
