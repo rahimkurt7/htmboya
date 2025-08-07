@@ -461,7 +461,6 @@ class VideoSlider {
         this.nextBtn = document.querySelector('.next-btn');
         this.currentSlide = 0;
         this.slideCount = this.slides.length;
-        this.autoPlayInterval = null;
         
         this.init();
     }
@@ -470,7 +469,6 @@ class VideoSlider {
         if (!this.sliderTrack) return;
         
         this.setupEventListeners();
-        this.startAutoPlay();
         this.updateDots();
     }
     
@@ -479,7 +477,6 @@ class VideoSlider {
         if (this.prevBtn) {
             this.prevBtn.addEventListener('click', () => {
                 this.prevSlide();
-                this.resetAutoPlay();
             });
         }
         
@@ -487,7 +484,6 @@ class VideoSlider {
         if (this.nextBtn) {
             this.nextBtn.addEventListener('click', () => {
                 this.nextSlide();
-                this.resetAutoPlay();
             });
         }
         
@@ -495,27 +491,23 @@ class VideoSlider {
         this.dots.forEach((dot, index) => {
             dot.addEventListener('click', () => {
                 this.goToSlide(index);
-                this.resetAutoPlay();
             });
         });
         
-        // Pause auto-play on hover
-        this.sliderTrack.addEventListener('mouseenter', () => {
-            this.pauseAutoPlay();
-        });
-        
-        this.sliderTrack.addEventListener('mouseleave', () => {
-            this.startAutoPlay();
+        // Video event listeners
+        this.slides.forEach((slide, index) => {
+            const video = slide.querySelector('video');
+            if (video) {
+                // Video oynatıldığında hiçbir şey yapma (manuel kontrol)
+            }
         });
         
         // Keyboard navigation
         document.addEventListener('keydown', (e) => {
             if (e.key === 'ArrowLeft') {
                 this.prevSlide();
-                this.resetAutoPlay();
             } else if (e.key === 'ArrowRight') {
                 this.nextSlide();
-                this.resetAutoPlay();
             }
         });
     }
@@ -541,30 +533,26 @@ class VideoSlider {
     updateSlider() {
         const translateX = -this.currentSlide * 100;
         this.sliderTrack.style.transform = `translateX(${translateX}%)`;
+        
+        // Tüm videoları durdur ve sadece aktif olanı oynat
+        this.slides.forEach((slide, index) => {
+            const video = slide.querySelector('video');
+            if (video) {
+                if (index === this.currentSlide) {
+                    // Aktif video için hiçbir şey yapma (kullanıcı kontrol edebilir)
+                } else {
+                    // Diğer videoları durdur ve başa sar
+                    video.pause();
+                    video.currentTime = 0;
+                }
+            }
+        });
     }
     
     updateDots() {
         this.dots.forEach((dot, index) => {
             dot.classList.toggle('active', index === this.currentSlide);
         });
-    }
-    
-    startAutoPlay() {
-        this.autoPlayInterval = setInterval(() => {
-            this.nextSlide();
-        }, 6000); // 6 saniyede bir değişir (video için daha uzun)
-    }
-    
-    pauseAutoPlay() {
-        if (this.autoPlayInterval) {
-            clearInterval(this.autoPlayInterval);
-            this.autoPlayInterval = null;
-        }
-    }
-    
-    resetAutoPlay() {
-        this.pauseAutoPlay();
-        this.startAutoPlay();
     }
 }
 
