@@ -179,6 +179,29 @@
         </div>
     </section>
 
+    <!-- Process Steps Section -->
+    <section class="process-steps-new">
+        <div class="container">
+            <div class="process-content-new">
+                <div class="process-step-new">
+                    <img src="gorseller/1.jpg" alt="Boyama Öncesi Hazırlıklar" class="process-image-new">
+                    <h4>Boyama Öncesi Hazırlıklar</h4>
+                    <p>Sanayi ve üretimin olduğu her alandan çeşitli ürünlere Elektrostatik Boya işlemi uyguluyoruz. Boya öncesi ürünler titizlikle hazırlıyoruz.</p>
+                </div>
+                <div class="process-step-new">
+                    <img src="gorseller/2.jpg" alt="Elektrostatik Boyama İşlemi" class="process-image-new">
+                    <h4>Elektrostatik Boyama İşlemi</h4>
+                    <p>Hazırlık asma ve temizleme işleminden sonra ürünler Elektrostatik Boyama Kabnimizde istenilen renge robotlar tarafından göre boyanır.</p>
+                </div>
+                <div class="process-step-new">
+                    <img src="gorseller/3.jpg" alt="Boya Kalitesi Ölçümü ve Onay" class="process-image-new">
+                    <h4>Boya Kalitesi Ölçümü ve Onay</h4>
+                    <p>Robotlar tarafından boyanan ürünler uzman ekibimiz tarafından örnekler alınıp boya kalite testi yapılır ve onaylanır.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
@@ -246,6 +269,16 @@
                         <p>Elektrostatik toz boya sürecimizi yakından izleyin</p>
                     </div>
                     <div class="video-slider-container">
+                        <!-- Video Cover Overlay - Shows initially, disappears on click -->
+                        <div class="video-cover-overlay" id="videoCoverOverlay">
+                            <img src="gorseller/videotanitimgorseli.png" alt="Video Tanıtım" class="video-cover-image">
+                            <div class="video-cover-content">
+                            
+                               
+                                <button class="video-cover-btn" onclick="hideVideoCover()">Videoları İzle</button>
+                            </div>
+                        </div>
+                        
                         <div class="video-slider-wrapper">
                             <div class="video-slider-track">
                                 <div class="video-slide">
@@ -679,6 +712,13 @@
             </div>
         </div>
     </footer>
+
+    <!-- Fixed Instagram Button -->
+    <div class="instagram-button">
+        <a href="https://www.instagram.com/htmelektrostatikboya/" target="_blank" aria-label="Instagram">
+            <i class="fab fa-instagram"></i>
+        </a>
+    </div>
 
     <!-- Fixed WhatsApp Button -->
     <div class="whatsapp-button">

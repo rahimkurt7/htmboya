@@ -612,6 +612,14 @@ class VideoSlider {
     }
 }
 
+// Function to hide video cover overlay
+function hideVideoCover() {
+    const coverOverlay = document.getElementById('videoCoverOverlay');
+    if (coverOverlay) {
+        coverOverlay.classList.add('hidden');
+    }
+}
+
 // Initialize sliders when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     new PhotoSlider();
