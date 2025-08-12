@@ -1,3 +1,34 @@
+// Loading Screen Management
+const loadingScreen = document.getElementById('loading-screen');
+
+// Hide loading screen when page is fully loaded
+window.addEventListener('load', () => {
+    // Add a small delay for better UX
+    setTimeout(() => {
+        if (loadingScreen) {
+            loadingScreen.classList.add('hidden');
+            // Remove from DOM after animation completes
+            setTimeout(() => {
+                if (loadingScreen && loadingScreen.parentNode) {
+                    loadingScreen.parentNode.removeChild(loadingScreen);
+                }
+            }, 500);
+        }
+    }, 1000);
+});
+
+// Fallback: Hide loading screen if load event doesn't fire
+setTimeout(() => {
+    if (loadingScreen && !loadingScreen.classList.contains('hidden')) {
+        loadingScreen.classList.add('hidden');
+        setTimeout(() => {
+            if (loadingScreen && loadingScreen.parentNode) {
+                loadingScreen.parentNode.removeChild(loadingScreen);
+            }
+        }, 500);
+    }
+}, 5000);
+
 // DOM Elements
 const navToggle = document.querySelector('.nav-toggle');
 const navMenu = document.querySelector('.nav-menu');
@@ -396,8 +427,8 @@ class PhotoSlider {
         this.sliderTrack = document.querySelector('.slider-track');
         this.slides = document.querySelectorAll('.slide');
         this.dots = document.querySelectorAll('.dot');
-        this.prevBtn = document.querySelector('.prev-btn');
-        this.nextBtn = document.querySelector('.next-btn');
+        this.prevBtn = document.querySelector('.slider-btn.prev-btn');
+        this.nextBtn = document.querySelector('.slider-btn.next-btn');
         this.currentSlide = 0;
         this.slideCount = this.slides.length;
         this.autoPlayInterval = null;
@@ -513,8 +544,8 @@ class VideoSlider {
         this.sliderTrack = document.querySelector('.video-slider-track');
         this.slides = document.querySelectorAll('.video-slide');
         this.dots = document.querySelectorAll('.video-dot');
-        this.prevBtn = document.querySelector('.prev-btn');
-        this.nextBtn = document.querySelector('.next-btn');
+        this.prevBtn = document.querySelector('.video-slider-btn.prev-btn');
+        this.nextBtn = document.querySelector('.video-slider-btn.next-btn');
         this.currentSlide = 0;
         this.slideCount = this.slides.length;
         
@@ -622,6 +653,22 @@ function hideVideoCover() {
 
 // Initialize sliders when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    new PhotoSlider();
-    new VideoSlider();
+    console.log('DOM yüklendi, slider\'lar başlatılıyor...');
+    
+    const photoSlider = new PhotoSlider();
+    const videoSlider = new VideoSlider();
+    
+    console.log('Photo Slider:', photoSlider);
+    console.log('Video Slider:', videoSlider);
+    
+    // Test button functionality
+    const photoPrevBtn = document.querySelector('.slider-btn.prev-btn');
+    const photoNextBtn = document.querySelector('.slider-btn.next-btn');
+    const videoPrevBtn = document.querySelector('.video-slider-btn.prev-btn');
+    const videoNextBtn = document.querySelector('.video-slider-btn.next-btn');
+    
+    console.log('Photo Prev Button:', photoPrevBtn);
+    console.log('Photo Next Button:', photoNextBtn);
+    console.log('Video Prev Button:', videoPrevBtn);
+    console.log('Video Next Button:', videoNextBtn);
 }); 
